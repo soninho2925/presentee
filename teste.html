@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Uma mensagem para minha ruiva 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ffe0f0, #ffe8d6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background-color: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff85c1;
+    }
+
+    #message {
+      font-size: 18px;
+      margin-top: 20px;
+      min-height: 60px;
+      white-space: pre-wrap;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: float 3s ease-in infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Oi cerejinha 😊</h1>
+    <p id="message" class="hidden"></p>
+    <button id="showMessage">Clique aqui 💖</button>
+    <div id="hearts-container"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("showMessage");
+    const messageElement = document.getElementById("message");
+    const heartsContainer = document.getElementById("hearts-container");
+
+    const message = "Eu te amo muito sabia?\nEstou com sdds de vc! 💕";
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      typeWriter(message);
+      launchHearts();
+    });
+
+    function typeWriter(text, i = 0) {
+      messageElement.classList.remove("hidden");
+      if (i < text.length) {
+        messageElement.textContent += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), 50);
+      }
+    }
+
+    function launchHearts() {
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+        heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+        heart.textContent = "❤️";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+</html>
